@@ -2,16 +2,21 @@ function getValues() {
     let input = document.getElementById('userString').value;
 
 
-    let revString = reverseString(input);
+    let results = checkForPalindrome(input);
 
-    checkForPalindrome(revString, input)
 
-    displayResults(results)
+    displayResults(results);
 }
 
-function reverseString(input) {
+function checkForPalindrome(input) {
 
     let revString = '';
+
+    input = input.toLowerCase();
+
+    let regex = /[^a-z0-9]/gi;
+    input = input.replace(regex, '')
+
 
     for (let index = input.length - 1; index >= 0; index--) {
 
@@ -20,36 +25,37 @@ function reverseString(input) {
         revString = revString + character;
     }
 
-    return revString;
+
+    let palindromeObj = {
+        isPalindrome: (revString == input),
+        reversedString: revString
+    };
+
+    return palindromeObj;
 }
 
-function checkForPalindrome(revString, userString) {
-
-    let results = ''
-
-    if (revString == userString) {
-        results = 'Palindrome';
-    } else {
-        results = 'Not A Palindrome';
-    }
-
-    return results;
-
-}
 
 function displayResults(results) {
 
-    if (results == 'Palindrome') {
-        document.getElementById('true');
+    let alertBox = document.getElementById('alert');
+    alertBox.classList.remove('invisible');
 
-        alertBox.classList.remove('invisible');
+    document.getElementById('msgReversed').textContent = `Your Message Reversed is ${results.reversedString}`;
+    if (results.isPalindrome == true) {
+        
+        alertBox.classList.remove('alert-danger');
 
+        document.getElementById('results').textContent = 'Great Job! You entered a palindrome!';
+
+        alertBox.classList.add('alert-success');
+    } else {
+
+        alertBox.classList.remove('alert-success');
+
+        document.getElementById('results').textContent = "Sorry! That's not a Palindrome!";
+
+        alertBox.classList.add('alert-danger');
     }
-    if (results == 'Not A Palindrome') {
 
-        document.getElementById('false')
-
-        alertBox.classList.remove('invisble')
-    }
 
 }

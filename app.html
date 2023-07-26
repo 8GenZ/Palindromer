@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>App Name: A Coding Challenge</title>
+    <title>Palindromer: A Coding Challenge</title>
 
 
     <!-- bs icons -->
@@ -29,7 +29,7 @@
             <div class="container-fluid">
                 <a class="navbar-brand" href="/index.html">
                     <img src="/img/mark.svg" height="50" alt="developer logo">
-                    App Name</a>
+                    Palindromer</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -63,11 +63,38 @@
     </header>
 
     <main class="container py-3">
-        <h1>APP UI GOES HERE</h1>
-        <input class="form-control" id="message" placeholder="Enter a message" type="text" value="jonjon" />
-        <button class="btn btn-primary my-3" id="btnSubmit" type="button">
-            Display Message
-        </button>
+        <div class="row row-cols-1 row-cols-md-2">
+            <div class="col">
+                <h1 class="display-5 fw-bold">Palindromer</h1>
+                <p class=" lead">Palindromer is an App designed to determine whether a string of text or a phrase is a palindrome or not.</p>
+                <h2 class="border-bottom border-dark mb-3">Instructions</h2>
+                <p>Enter any word or phrase. When you are ready, press Check IT.</p>
+            </div>
+            <div class="col">
+                <h5 class="border-bottom mb-3 border-dark">Enter a phrase or word to check</h5>
+                <form action="#" class="row g-3">
+                    <div class="col-12">
+                        <input class="form-control" placeholder="palindromer" aria-label="Enter a phrase or word"
+                            name="userString" id="userString" type="text" />
+                    </div>
+                    <div class="col-12 ">
+                        <button class="btn btn-primary" type="button" id="btnSubmit">
+                            Check it
+                        </button>
+                    </div>
+                </form>
+                <div class="alert alert-danger mt-4 fade show invisible" role="alert" id="true">
+                    <h4>Sorry!</h4>
+                    <hr />
+                    Your string reversed is a not palindrome! <span class="fw-bold" id="results"></span>
+                </div>
+                <div class="success alert-success mt-4 fade show invisible" role="alert" id="false">
+                    <h4>Well Done</h4>
+                    <hr />
+                    Your string reversed is a palindrome! <span class="fw-bold" id="results"></span>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer class="footer container-fluid py-3">
@@ -105,7 +132,7 @@
     <script src="/js/site.js"></script>
 
     <script>
-        document.getElementById('btnSubmit').addEventListener('click', displayMessage);
+        document.getElementById('btnSubmit').addEventListener('click', getValues);
     </script>
 </body>
 

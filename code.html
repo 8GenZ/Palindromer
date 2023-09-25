@@ -69,28 +69,97 @@
             <div class="col-12 col-lg-8">
                 <pre class="line-numbers">
                     <code class="language-js">
-                        function displayMessage() {
-                            let inputbox = document.getElementById('message');
-                        
-                            let message = inputbox.value;
+                        function getValues() {
+                            let input = document.getElementById('userString').value;
                         
                         
-                            Swal.fire(
-                                {
-                                    backdrop: false,
-                                    title: 'App Name',
-                                    text: message
-                                }
-                            )
+                            let results = checkForPalindrome(input);
+                        
+                        
+                            displayResults(results);
+                        }
+                        
+                        function checkForPalindrome(input) {
+                        
+                            let revString = '';
+                        
+                            input = input.toLowerCase();
+                        
+                            let regex = /[^a-z0-9]/gi;
+                            input = input.replace(regex, '')
+                        
+                        
+                            for (let index = input.length - 1; index >= 0; index--) {
+                        
+                                let character = input[index];
+                        
+                                revString = revString + character;
+                            }
+                        
+                        
+                            let palindromeObj = {
+                                isPalindrome: (revString == input),
+                                reversedString: revString
+                            };
+                        
+                            return palindromeObj;
+                        }
+                        
+                        
+                        function displayResults(results) {
+                        
+                            let alertBox = document.getElementById('alert');
+                            alertBox.classList.remove('invisible');
+                        
+                            document.getElementById('msgReversed').textContent = `Your Message Reversed is ${results.reversedString}`;
+                            if (results.isPalindrome == true) {
+                                
+                                alertBox.classList.remove('alert-danger');
+                        
+                                document.getElementById('results').textContent = 'Great Job! You entered a palindrome!';
+                        
+                                alertBox.classList.add('alert-success');
+                            } else {
+                        
+                                alertBox.classList.remove('alert-success');
+                        
+                                document.getElementById('results').textContent = "Sorry! That's not a Palindrome!";
+                        
+                                alertBox.classList.add('alert-danger');
+                            }
+                        
+                        
                         }
                     </code>
                 </pre>
             </div>
             <div class="col-12 col-lg-4">
-                <p>The Code is structured in one funtion</p>
-                <h5>displayMessage</h5>
-                <p>Shows a Sweetalert with the value of the <code>message</code> variable
+                <p>The Code is structured in three funtions</p>
+                <h5>getValues</h5>
+                <p>: This function acts as the entry point for the program. It retrieves the input string
+                    element with the ID 'userString.' The input is then passed to the checkForPalindrome() function.
+                    Finally, the results returned from checkForPalindrome() are displayed using the displayResults()
+                    function.
                 </p>
+                <h5>checkForPalindrome</h5>
+                This function performs the logic to check whether the input string is a palindrome. It starts by
+                initializing an empty string 'revString' to store the reversed version of the input. It converts the
+                input
+                to lowercase and removes any non-alphanumeric characters using a regex expression. Then, it iterates
+                through the characters of the input string in reverse order and builds the reversed string revString.
+                After constructing the reversed string, the function creates an object palindromeObj with two
+                properties: isPalindrome (a boolean indicating whether the input is a palindrome) and reversedString
+                (the reversed version of the input). Finally, it returns palindromeObj with the results.
+                </p>
+                <h5>displayResults</h5>
+                <p>This function is responsibl for displaying the results of the palindrome
+                    check. It first selects an HTML element with the ID 'alert' and removes the 'invisible' class to
+                    make it visible. Then, it updates the content of an HTML element with the ID 'msgReversed' to
+                    display the reversed version of the input string from the results object. Depending on whether the
+                    input is a palindrome (results.isPalindrome), it modifies the content and styling of an HTML element
+                    with the ID 'results' and the class of the 'alert' element. If it's a palindrome, a success message
+                    is displayed, and the 'alert-success' class is added to the 'alert' element; otherwise, an error
+                    message is displayed, and the 'alert-danger' class is added.
             </div>
         </div>
     </main>
